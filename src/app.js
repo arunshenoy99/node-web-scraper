@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 
+const scrape = require('./utils/scrape')
+
 const app = express()
 
 const staticPath = path.join(__dirname, '../public')
@@ -20,7 +22,13 @@ app.get('', (req, res) => {
 })
 
 app.get('/scrape', (req, res) => {
-    
+    const url = req.query.url
+    scrape(url, (error, response) => {
+        if (error) {
+            return res.status(400).send()
+        }
+        res.send("hello")
+    })
 })
 
 

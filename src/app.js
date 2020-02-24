@@ -1,6 +1,9 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const fs = require('fs')
+const { parse } = require('node-html-parser')
+const validator = require('validator')
 
 const scrape = require('./utils/scrape')
 
@@ -21,13 +24,30 @@ app.get('', (req, res) => {
     res.render('index')
 })
 
+app.get('/check', (req,res) => {
+    const url = req.query.url
+    const isValid = validator.isURL(url.trim())
+    if (isValid) {
+        res.send("Valid")
+    } else {
+        res.status(400).send('Invalid')
+    }
+})
+
 app.get('/scrape', (req, res) => {
     const url = req.query.url
-    scrape(url, (error, response) => {
+    scrape(url, (error, html) => {
         if (error) {
+            console.log(error)
             return res.status(400).send()
         }
-        res.send("hello")
+        const root = parse(html)
+        const title = (root.querySelector('title').childNodes[0].rawText)
+        const filePath = webFilesPath + `/${title}.html`
+        fs.writeFileSync(filePath, html)
+        res.download(filePath, function (err) {
+            fs.unlinkSync(filePath)
+        })
     })
 })
 

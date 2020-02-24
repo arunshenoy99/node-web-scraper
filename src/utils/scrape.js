@@ -1,11 +1,17 @@
 const request = require('request')
 
 const scrape = (url, callback) => {
-    request.get({ url }, (error, { body } = undefined) => {
+    url = url.trim()
+    if (url.startsWith('http://' || url.startsWith('https://'))) {
+        url = url
+    } else {
+        url = "http://" + url
+    }
+    request.get({ url }, (error, response) => {
         if (error) {
             return callback(error, undefined)
         }
-        console.log(body)
+        callback(undefined, response.body)
     })
 }
 

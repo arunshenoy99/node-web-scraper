@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "hbs": "^4.1.0",
-    "request": "^2.88.2"
+    "node-html-parser": "^1.2.7",
+    "request": "^2.88.2",
+    "validator": "^12.2.0"
   }
 }

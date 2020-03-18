@@ -2,7 +2,7 @@ const request = require('request')
 
 const scrape = (url, callback) => {
     url = url.trim()
-    if (url.startsWith('http://' || url.startsWith('https://'))) {
+    if (url.startsWith('http://') || url.startsWith('https://')) {
         url = url
     } else {
         url = "http://" + url

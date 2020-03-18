@@ -12,7 +12,7 @@ $urlForm.addEventListener('submit', (e) => {
         $resultPara.textContent = 'Please provide a valid URL'
         return
     }
-    fetch('http://localhost:3000/check?url=' + url.trim())
+    fetch('http://localhost:3000/check?url=' + encodeURIComponent(url.trim()))
     .then((response) => {
         response.text()
         .then((status) => {

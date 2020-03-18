@@ -36,7 +36,7 @@ app.get('/check', (req,res) => {
 
 app.get('/scrape', (req, res) => {
     const url = req.query.url
-    scrape(url, (error, html) => {
+    scrape(decodeURIComponent(url), (error, html) => {
         if (error) {
             console.log(error)
             return res.status(400).send()

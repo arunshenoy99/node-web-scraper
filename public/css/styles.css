@@ -1,0 +1,40 @@
+#form-div {
+    max-width: 75%;
+    min-height: 450px;
+    margin: auto;
+    position: relative;
+}
+
+#url {
+    position: relative;
+    top: 300px;
+    left: 400px;
+    display: block;
+    margin: auto;
+}
+
+#url input {
+    padding:3px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid gray;
+    width: 250px;
+    height: 50px;
+    font-size: large;
+    margin-bottom: 16px;
+    transition: 1s width ease-in-out;
+}
+
+#url input:focus {
+    width: 350px;
+}
+
+#url button {
+    width: 150px;
+    height: 25px;
+    border: none;
+}
+
+#url button:hover {
+    cursor: pointer;
+}
